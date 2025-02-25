@@ -2,19 +2,19 @@
 using namespace std;
 
 queue<int> reverseQueue(queue<int> tep) {
-    stack<int> st;
-    
+    queue<int> q;
+
     while (!tep.empty()) {
-        st.push(tep.front());
+        q.push(tep.front());
         tep.pop();
+        int size = q.size();
+        for (int i = 0; i < size - 1; i++) {
+            q.push(q.front());
+            q.pop();
+        }
     }
 
-    while (!st.empty()) {
-        tep.push(st.top());
-        st.pop();
-    }
-
-    return tep;
+    return q;
 }
 
 int main() {
@@ -24,7 +24,7 @@ int main() {
     st.push(3);
 
     cout << "Original Queue: ";
-    queue<int> temp = st; 
+    queue<int> temp = st;
     while (!temp.empty()) {
         cout << temp.front() << " ";
         temp.pop();
